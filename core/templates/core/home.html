@@ -1,0 +1,83 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block first_content %}
+
+<div class="container-fluid">
+    <div class="col-ms-3" style="padding-top:1rem">
+
+        <h2 id="text">Portal Conciertos</h2>
+        <h3 id="text">Infomación de próximos conciertos.</h3>
+    </div>
+</div>
+
+
+<div class="container-fluid">
+  <div>
+    <div class="container mt-5">
+      <h5 id="text">Bienvenido a tu portal de conciertos, donde podrás encontrar información acerca de los valores, fechas,
+        lugares de tus artistas favoritos y sus visitas a nuestro país!
+      </h5>
+
+      <br>
+
+      <p id="text" style="border:1px">No te pierdas de ninguna informacion de la presentación de tu artista favorito!
+      </p>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block second_content %}
+
+<div class="container-fluid">
+  <div id="carouselExampleCaptions" class="carousel slide">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+        aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4" aria-label="Slide 5"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="5" aria-label="Slide 6"></button>
+    </div>
+    
+    <div class="carousel-inner">
+      {% for c in conciertos %}
+      <div class="carousel-item {% if forloop.first %} active {% endif %}"> 
+                               
+        <img src="{{c.imagen.url}}" alt="{{c.artista}}" class="d-block w-100 object-fit-scale border rounded" width="600" height="700">
+        <div  class="carousel-caption d-none d-md-block p-3.5 text-bg-dark bg-opacity-100">
+          <h5><a href="{% url 'informacion' concierto_id=c.idConcierto%}">{{c.artista}}</a></h5>
+          <p>{{c.recinto}} - {{c.fecha}}</p>
+        </div>
+      </div>
+      {% endfor %}
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+          data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+          data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Siguiente</span>
+        </button>
+    </div>
+  </div>  
+</div> 
+
+{% endblock %}
+
+{% block js_ %}
+    <script src="{% static 'core/js/jquery-3.6.4.min.js' %}"></script>
+    <script src="{% static 'core/js/openWeatherMap.js' %}"></script>
+    <script src="{% static 'core/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'core/js/popper.min.js' %}"></script>
+    <script src="{% static 'core/js/relojito.js' %}"></script>
+    <script src="{% static 'core/js/darkmode.js' %}"></script>
+{% endblock %}

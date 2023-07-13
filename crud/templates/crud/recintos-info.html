@@ -1,0 +1,37 @@
+{% extends 'crud/base.html' %}
+
+{% load static %}
+
+{% block title %}Información de {{recinto.nomRecinto}}{% endblock %}
+
+{% block second_content %}
+<div>
+    <div class="container fluid">
+        <div class="col-md-8">
+            <ul class="list-unstyled">
+                <li class="mb-2">Recinto: <p class="fw-bold">{{recinto.nomRecinto}}</p></li>
+                <li class="mb-2">Capacidad: <p class="fw-bold">{{recinto.capacidad}}</p></li>
+                <li class="mb-2">Comuna: <p class="fw-bold">{{recinto.comuna}}</p></li>
+                <li class="mb-2">Dirección: <p class="fw-bold">{{recinto.direccion}}</p></li>
+                <li class="mb-2">Estacionamientos: <p class="fw-bold">{{recinto.estacionamiento}}</p></li>
+            </ul>
+            <div class="row">
+                <div class="col-2">
+                    <a class="btn btn-outline-primary" href="{% url 'recintos' %}">Volver</a>
+                </div>
+                <div class="col-2">
+                    <a class="btn btn-outline-secondary" href="{% url 'recintos-editar' recinto_id=recinto.idRecinto %}">Editar</a>
+                </div>
+                <div class="col-2">
+                    <a class="btn btn-outline-danger modal-borrar" data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop"
+                    data-href="{% url 'recintos-borrar' recinto_id=recinto.idRecinto %}">
+                    Eliminar
+                </a>
+                </div>
+            </div>
+        </div>        
+    </div>
+</div>
+
+{% endblock %}

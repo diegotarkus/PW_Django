@@ -1,0 +1,40 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}Información{% endblock %}
+
+{% block first_content %}
+<div class="container m-4">
+    <div class="row mb-3">
+        <h4>ID : {{concierto.idConcierto}}</h4>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block second_content %}
+<div class="container fluid bg-white p-4">
+    <div class="row">
+        <div class="col-md-4">
+            {% if concierto.imagen %}
+            <img src="{{concierto.imagen.url}}" alt="{{concierto.artista}}" height="90%" width="100%">
+            {% else%}
+            <img src="{% static 'crud/img/image_not_found.jpg' %}" alt="INF">
+            {% endif %}
+        </div>
+        <div class="col-md-8">
+            <ul class="list-unstyled">
+                <li class="mb-2">Artista: <p class="fw-bold">{{concierto.artista}}</p></li>
+                <li class="mb-2">Recinto: <p class="fw-bold">{{concierto.recinto}}</p></li>
+                <li class="mb-2">Fecha: <p class="fw-bold">{{concierto.fecha}}</p></li>
+                <li class="mb-2">Valores: <p class="fw-bold">{{concierto.valores}}</p></li>
+                <li class="mb-2">Tickets a la venta: <p class="fw-bold">{{concierto.recinto.capacidad}}</p></li>
+                <li class="mb-2"><a class="btn btn-dark m-2" href="{{concierto.artista.playlist}}" target="_blank">Playlist</a> ||  <a class="btn btn-success m-2" href="{{concierto.venta}}" target="_blank">Compra tus entradas</a>
+                    || <a class="btn btn-danger m-2" href="{% url 'conciertos' %}" target="_self">Volver</a></li>
+            </ul>
+        </div>        
+    </div>
+</div>
+
+{% endblock%}

@@ -1,0 +1,150 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    {% block css_ %}{% endblock %}
+
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+    <title>{% block title %}{% endblock %} || Proyecto web 2023</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img class="nav-icon" src="{% static 'img/nota-musical.png' %}" alt="imghome" width="50" height="50"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'conciertos' %}">Información</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'api' %}">API</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'about' %}">Acerca</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'contact' %}">Contacto</a>
+                    </li>
+                    <li><button class="btn btn-primary" id="modo">Modo oscuro</button></li>
+                    <div class="position-absolute top-50 end-0 translate-middle-y">
+                        {% if request.session.usuario.rol == none %}
+                        <li class="nav-item">
+                            <a class="nav-link link-warning link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover d-inline p-2" href="{% url 'registrar' %}">Registarse</a>
+                        </li>
+                        <li class="nav-item">                        
+                            <a class="nav-link link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover d-inline p-2" href="{% url 'login' %}">Ingresar</a>
+                        </li>
+                        {% endif %}
+                        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                            <div class="navbar-nav">
+                                {% if request.session.usuario.rol == 'ADMIN' %}
+                                    <a class="nav-link " href="/admin">Admin</a>
+                                    <a class="nav-link " href="{% url 'logout' %}">Logout</a>
+                                {% elif request.session.usuario.rol == 'USER' %}
+                                    <a class="nav-link " href="{% url 'logout' %}">Logout</a>                                    
+                                {% endif %}  
+                            </div>
+                        </div>
+                    </div>        
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        {% block first_content %}{% endblock %}
+
+        {% block second_content %}{% endblock %}
+    </main>
+
+    <div class="footer">
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6>Navegación</h6>
+                        <ul>
+                            <a href="{% url 'home' %}">Inicio</a>
+                            <br>
+                            <a href="{% url 'conciertos' %}">Información conciertos</a>
+                            <br>
+                            <a href="api.html">API</a>
+                            <br>
+                            <a href="{% url 'about' %}">Nosotros</a>
+                            <br>
+                            <a href="{% url 'contact' %}">Contacto</a>
+                            <br>
+
+                        </ul>
+                        
+                    </div>
+
+                    <div class="col-sm-3">
+                        <h6>Links</h6>
+                        <ul>
+                           <a href="https://www.google.cl/">Google</a>
+                           <br> 
+                           <a href="https://www.youtube.com/">Youtube</a>
+                           <br>
+                           <a href="https://www.github.com">GitHub</a>
+                           <br>
+                           <a href="https://www.w3schools.com">w3schools</a>
+                           <br>
+                           <a href="https://getbootstrap.com/docs/5.3/">Bootstrap Docs</a>
+                        </ul>    
+                    </div>
+
+                    <div class="col-lg-3">
+                        <h6>¿Qué hora es?</h6>
+                        <br>
+                        <div id="fecha"></div>
+                        <br>
+                        <div id="reloj"></div>
+                        <ul>
+                            <img src="{% static 'img/Logo_DuocUC.svg.png' %}" alt="duoc" width="90" height="30"><p>Programación web © DuocUC 2023</p>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3">
+                      <h6>Tiempo hoy: <p id="climg"></p></h6>
+                      <div id="clima"></div>
+                    </div>
+                </div>                
+            </div>
+        </footer>
+    </div>
+
+
+
+    <script src="{%static 'js/jquery-3.6.4.min.js' %}"></script>
+    <script src="{%static 'js/bootstrap.min.js' %}"></script>
+    <script src="{%static 'js/popper.min.js' %}"></script>
+    <script src="{%static 'js/relojito.js' %}"></script>
+    <script src="{%static 'js/darkmode.js' %}"></script>
+    <script src="{%static 'js/openWeatherMap.js' %}"></script>
+    <script src="{%static 'js/api.js' %}"></script>
+    <script src="{%static 'js/formularioJQuery.js' %}"></script>
+
+</body>
+
+</html>

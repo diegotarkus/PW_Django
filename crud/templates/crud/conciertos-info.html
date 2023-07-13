@@ -1,0 +1,83 @@
+{% extends 'crud/base.html' %}
+
+{% load static %}
+
+{% block title %}Información{% endblock %}
+
+{% block first_content %}
+<div class="container m-4">
+    <div class="row mb-3">
+        <h4>ID : {{concierto.idConcierto}}</h4>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block second_content %}
+<div>
+    <div class="row">
+        <div class="col-md-4">
+            {% if concierto.imagen %}
+            <img src="{{concierto.imagen.url}}" alt="{{concierto.artista}}" height="80%" width="80%">
+            {% else%}
+            <img src="{% static 'crud/img/image_not_found.jpg' %}" alt="INF">
+            {% endif %}
+        </div>
+        <div class="col-md-8">
+            <ul class="list-unstyled">
+                <li class="mb-2">Artista: <p class="fw-bold">{{concierto.artista}}</p></li>
+                <li class="mb-2">Recinto: <p class="fw-bold">{{concierto.recinto}}</p></li>
+                <li class="mb-2">Fecha: <p class="fw-bold">{{concierto.fecha}}</p></li>
+                <li class="mb-2">Valores: <p class="fw-bold">{{concierto.valores}}</p></li>
+                <li class="mb-2"><p class="fw-bold"><a class="btn btn-dark" href="{{concierto.venta}}" target="_blank">Link</a></p></li>
+                <li class="mb-2"><p class="fw-bold"><a class="btn btn-dark" href="{{concierto.artista.playlist}}" target="_blank">Playlist</a></p></li>
+            </ul>
+            <div class="row">
+                <div class="col-2">
+                    <a class="btn btn-outline-primary" href="{% url 'crud-conciertos' %}">Volver</a>
+                </div>
+                <div class="col-2">
+                    <a class="btn btn-outline-secondary" href="{% url 'conciertos-editar' concierto_id=concierto.idConcierto %}">Editar</a>
+                </div>
+                <div class="col-2">
+                    <a class="btn btn-outline-danger modal-borrar" data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop"
+                    data-href="{% url 'conciertos-borrar' concierto_id=concierto.idConcierto %}">
+                    Eliminar
+                </a>
+                </div>
+            </div>
+        </div>        
+    </div>
+</div>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Mensajes</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h6 class="modal-title">Eliminar concierto seleccionado?</h6>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancelar</button>
+                <a href="#" id="confirmar-borrar" class="btn btn-danger">Eliminar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock%}
+
+{% block extra_js %}
+<script>
+    $('.modal-borrar').on('click',function(){
+        const href = $(this).attr('data-href');
+        $('#confirmar-borrar').attr('href',href);
+    });
+</script>
+{% endblock %}
+

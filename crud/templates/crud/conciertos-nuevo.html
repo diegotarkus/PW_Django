@@ -1,0 +1,75 @@
+{% extends 'crud/base.html' %}
+
+{% load static %}
+
+{% block title%}Añadir concierto{% endblock %}
+
+{% block first_content %}
+<div class="container my-2 py-3 text-dark text-center rounded">
+    <h1>Agregando información de concierto</h1>
+</div>
+<div class="container my-2 p-5">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group mb-3">
+            <label for="idConcierto" class="fw-bold">ID:</label>
+            <div class="input-group">
+                {{form.idConcierto}}
+            </div>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="artista" class="fw-bold">Artista:</label>
+            <div class="input-group">
+                {{form.artista}}
+            </div>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="recinto" class="fw-bold">Recinto:</label>
+            <div class="input-group">
+                {{form.recinto}}
+            </div>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="fecha" class="fw-bold">Fecha:</label>
+            <div class="input-group">
+                {{form.fecha}}
+            </div>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="valores" class="fw-bold">Valores:</label>
+            <div class="input-group">
+                {{form.valores}}
+            </div>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="venta" class="fw-bold">Link:</label>
+            <div class="input-group">
+                {{form.venta}}
+            </div>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="imagen" class="fw-bold">Imagen</label>
+            <div class="input-group">
+                {{form.imagen}}
+            </div>
+            {% if form.instance.imagen %}
+                <div class="row my-2">
+                    <img src="{{form.instance.imagen.url}}" alt="{{form.instance.imagen}}" width="30%" height="30%">
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="text-center my-4">
+            <input type="submit" class="btn btn-primary m-2" id="registrar" value="Guardar">
+            <input type="reset" class="btn btn-danger m-2" id="limpiar" value="Cancelar">
+            <a class="btn btn-success m-2" href="{% url 'conciertos' %}">Volver</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

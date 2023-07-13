@@ -1,0 +1,116 @@
+a{
+    margin-right: 10px;
+    font-size: large;
+
+}
+
+#text{
+    color: rgb(255, 255, 255);
+}
+
+.navbar-custom{
+    background-color: rgb(29, 110, 29);
+}
+
+body{
+    background-color: rgb(131, 141, 236);
+    background-blend-mode: darken   ;
+    padding-top: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.form-control{
+    padding-right: 5rem;
+}
+
+button a{
+    color: antiquewhite;
+}
+
+a:hover{
+    color: red;
+    text-decoration: underline;
+}
+
+.card{
+    margin: 1rem;
+    padding: 1rem;
+}
+
+small{
+    color: red;
+    font-style: italic;
+}
+
+footer{
+    background-color: rgb(100, 202, 168);
+    margin-top: 1rem;
+    padding-top: 1rem;
+    list-style-position: inside;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+footer h3 {
+    margin-top:0;
+    margin-bottom:12px;
+    font-weight:bold;
+    font-size:16px;
+}
+
+footer ul {
+    padding:0;
+    list-style-type:circle;
+    line-height:1.6;
+    font-size:14px;
+    margin-bottom:0;
+    margin-left: 10px;
+}
+
+footer a:hover{
+    color :red;
+    opacity: 0.5;
+}
+
+#fecha{
+    display:block;
+    text-align:left;
+    font-size: 1.2rem;
+    margin-top: 0rem;
+    color: rgba(85, 9, 9, 0.733);
+    margin-bottom: 0rem;
+    padding-top: 0px;
+    width: 100%;
+    background: rgb(rgb(167, 28, 28), rgb(66, 146, 66), rgb(12, 12, 131))
+}
+
+#reloj{
+    display:block;
+    text-align: left;
+    color: rgba(85, 9, 9, 0.733);
+    font-size: 1.5rem;
+    margin-top: 0rem;
+    margin-bottom: 0.3rem;
+    padding-top: 3px;
+    width: 100%;
+    background: rgb(rgb(167, 28, 28), rgb(66, 146, 66), rgb(12, 12, 131))
+}
+
+#clima{
+    color: rgba(85, 9, 9, 0.733);
+}
+
+
+.dark{
+    background: #222;
+    color: #ffffff;
+}
+
+.error{
+    color:red;
+}
+
+.img-afiche{
+    max-width: 200px;
+    max-height: 200px;
+}

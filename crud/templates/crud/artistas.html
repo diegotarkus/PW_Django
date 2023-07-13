@@ -1,0 +1,98 @@
+{% extends 'crud/base.html' %}
+
+{% load static %}
+
+{% block title %}Calendario de Conciertos{% endblock %}
+
+{% block first_content %}
+
+<div class="container my-2 py-3 text-dark text-center rounded">
+    <h2>Administrador</h2>
+</div>
+
+<div class="container my-1">
+    <div class="row">
+        {% if 'OK' in request.GET %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Información <strong>ingresada</strong> satisfactoriamente.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+        {% if 'FAIL' in request.GET %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Se ha producido un error.</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+        {% if 'NO_EXISTS' in request.GET %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Artista no encontrado.</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+        {% if 'UPDATED' in request.GET %}
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            Información <strong>actualizada</strong> satisfactoriamente.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+        {% if 'DELETED' in request.GET %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            Información <strong>eliminada</strong> satisfactoriamente.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
+
+{% block second_content %}
+
+
+<div class="container-fluid my-2">
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Artista</th>
+                    <th>País</th>
+                    <th>Año debut</th>
+                    <th>Genero</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in artistas %}
+                <tr>
+                    <td>{{a.idArtista}}</td>
+                    <td>{{a.nomArtista}}</td>
+                    <td>{{a.pais}}</td>
+                    <td>{{a.anio}}</td>
+                    <td><a class=" text-dark" href="artistas/genero/{{a.genero}}">{{a.genero}}</td>
+                     <td>
+                        <a class="text-decoration-none" href="{% url 'artistas-info' artista_id=a.idArtista %}">
+                            <span class="text-primary fs-2">
+                                <i class="fa-solid fa-eye"></i>
+                            </span>
+                        </a>
+                        <a class="text-decoration-none" href="{% url 'artistas-editar' artista_id=a.idArtista %}">
+                            <span class="text-warning fs-2">
+                                <i class="fa-solid fa-pencil"></i>
+                            </span>
+                        </a>
+                        <a class="text-decoration-none" href="{% url 'artistas-borrar' artista_id=a.idArtista %}">
+                            <span class="text-danger fs-2">
+                                <i class="fa-solid fa-trash"></i>
+                            </span>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

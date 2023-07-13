@@ -1,0 +1,34 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block first_content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+                <img src="{% static 'img/rodrigo.jpg' %}" alt="" class="img-fluid mx-auto d-block" width="250px" height="250px">
+              <h5 class="card-title" style="padding:1rem">Rodrigo Castañeda</h5>
+              <p class="card-text">28 años. Estudiante de Analista Programador en DuocUC. Reside en San Joaquín.</p>
+              <a href="https://blogger.googleusercontent.com/img/a/AVvXsEhPBmQTeAsI3Lo_wMuQUqqgQzXohKr_E-SYRNN2djv2Fb5TyDJrnzbhq28h3YhqfYip7SDWRYnN_-Tak3MHWZSrvY8R7k9rZ1xwdRcokBtQf_VMThc7PEJN380I-dyS2aWtlwfSE39mPVYG30QilK30ToXALFcBLu_7wg3zEyeSkDRghn9okEshR7Zubw=s700" target="_blank" class="btn btn-primary">Acerca de mí</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+                <img src="{% static 'img/diego.jpg' %}" alt="" class="img-fluid mx-auto d-block" width="300px" height="300px">
+              <h5 class="card-title" style="padding:1rem">Diego Galarce</h5>
+              <p class="card-text">28 años. Estudiante de Analista Programador en DuocUC. Reside en Macul.</p>
+              <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="btn btn-primary">Acerca de mí.</a>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+
+{% endblock %}

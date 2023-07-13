@@ -1,0 +1,63 @@
+{% extends 'crud/base.html' %}
+
+{% load static %}
+
+{% block title%}Editar artista{% endblock %}
+
+{% block first_content %}
+<div class="container my-2 py-3 text-dark text-center rounded">
+    <h1>Editando información de artista</h1>
+</div>
+<div class="container my-2 p-5">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group mb-3">
+            <label for="idArtista" class="fw-bold">ID:</label>
+            <div class="input-group">
+                {{form.idArtista}}
+            </div>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="nomArtista" class="fw-bold">Artista:</label>
+            <div class="input-group">
+                {{form.nomArtista}}
+            </div>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="pais" class="fw-bold">País:</label>
+            <div class="input-group">
+                {{form.pais}}
+            </div>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="anio" class="fw-bold">Año debut:</label>
+            <div class="input-group">
+                {{form.anio}}
+            </div>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="genero" class="fw-bold">Género:</label>
+            <div class="input-group">
+                {{form.genero}}
+            </div>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="playlist" class="fw-bold">Playlist:</label>
+            <div class="input-group">
+                {{form.playlist}}
+            </div>
+        </div>
+
+        <div class="text-center my-4">
+            <input type="submit" class="btn btn-primary m-2" id="actualizar" value="Actualizar">
+            <input type="reset" class="btn btn-danger m-2" id="limpiar" value="Cancelar">
+            <a class="btn btn-success m-2" href="{% url 'artistas' %}">Volver</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

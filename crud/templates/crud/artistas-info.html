@@ -1,0 +1,74 @@
+{% extends 'crud/base.html' %}
+
+{% load static %}
+
+{% block title %}Información{% endblock %}
+
+{% block first_content %}
+<div class="container m-4">
+    <div class="row mb-3">
+        <h4>ID : {{artista.idArtista}}</h4>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block second_content %}
+<div>
+    <div class="container fluid">
+        <div class="col-md-8">
+            <ul class="list-unstyled">
+                <li class="mb-2">Artista: <p class="fw-bold">{{artista.nomArtista}}</p></li>
+                <li class="mb-2">País: <p class="fw-bold">{{artista.pais}}</p></li>
+                <li class="mb-2">Año debut: <p class="fw-bold">{{artista.anio}}</p></li>
+                <li class="mb-2">Género: <p class="fw-bold">{{artista.genero}}</p></li>
+            </ul>
+            <div class="row">
+                <div class="col-2">
+                    <a class="btn btn-outline-primary" href="{% url 'artistas' %}">Volver</a>
+                </div>
+                <div class="col-2">
+                    <a class="btn btn-outline-secondary" href="{% url 'artistas-editar' artista_id=artista.idArtista %}">Editar</a>
+                </div>
+                <div class="col-2">
+                    <a class="btn btn-outline-danger modal-borrar" data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop"
+                    data-href="{% url 'artistas-borrar' artista_id=artista.idArtista %}">
+                    Eliminar
+                </a>
+                </div>
+            </div>
+        </div>        
+    </div>
+</div>
+
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Mensajes</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h6 class="modal-title">Eliminar concierto seleccionado?</h6>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancelar</button>
+                <a href="#" id="confirmar-borrar" class="btn btn-danger">Eliminar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock%}
+
+{% block extra_js %}
+<script>
+    $('.modal-borrar').on('click',function(){
+        const href = $(this).attr('data-href');
+        $('#confirmar-borrar').attr('href',href);
+    });
+</script>
+{% endblock %}

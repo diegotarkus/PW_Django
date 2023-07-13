@@ -1,0 +1,101 @@
+{% extends 'crud/base.html' %}
+
+{% load static %}
+
+{% block title %}Información de recintos{% endblock %}
+
+{% block first_content %}
+
+<div class="container my-2 py-3 text-dark text-center rounded">
+    <h2>Administrador</h2>
+</div>
+
+<div class="container my-1">
+    <div class="row">
+        {% if 'OK' in request.GET %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Información <strong>ingresada</strong> satisfactoriamente.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+        {% if 'FAIL' in request.GET %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Se ha producido un error.</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+        {% if 'NO_EXISTS' in request.GET %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Artista no encontrado.</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+        {% if 'UPDATED' in request.GET %}
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            Información <strong>actualizada</strong> satisfactoriamente.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+        {% if 'DELETED' in request.GET %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            Información <strong>eliminada</strong> satisfactoriamente.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
+
+{% block second_content %}
+
+
+<div class="container-fluid my-2">
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Recinto</th>
+                    <th>Capacidad</th>
+                    <th>Comuna</th>
+                    <th>Dirección</th>
+                    <th>Estacionamientos</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in recinto %}
+                <tr>
+                    <td>{{r.idRecinto}}</td>
+                    <td>{{r.nomRecinto}}</td>
+                    <td>{{r.capacidad}}</td>
+                    <td><a class=" text-dark" href="recintos/comuna/{{r.comuna}}">{{r.comuna}}</td>
+                    <td>{{r.direccion}}</td>
+                    <td>{{r.estacionamiento}}</td>
+                    <td>
+                        <a class="text-decoration-none" href="{% url 'recintos-info' recinto_id=r.idRecinto %}">
+                            <span class="text-primary fs-2">
+                                <i class="fa-solid fa-eye"></i>
+                            </span>
+                        </a>
+                        <a class="text-decoration-none" href="{% url 'recintos-editar' recinto_id=r.idRecinto %}">
+                            <span class="text-warning fs-2">
+                                <i class="fa-solid fa-pencil"></i>
+                            </span>
+                        </a>
+                        <a class="text-decoration-none" href="{% url 'recintos-borrar' recinto_id=r.idRecinto %}">
+                            <span class="text-danger fs-2">
+                                <i class="fa-solid fa-trash"></i>
+                            </span>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}

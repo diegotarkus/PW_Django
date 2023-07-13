@@ -1,0 +1,92 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}Registro{% endblock %}
+
+{% block first_content %}
+
+<div class="container mt-4">  
+    {% if messages %}
+        <div class="alert {{ request.session.level_mensaje }} alert-dismissible" role="alert" >
+            <ul>
+                {% for message in messages %}
+                    <li><strong>{{message}}</strong></li>    
+                {% endfor %}                   
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </ul>
+        </div>        
+    {% endif %}
+<div class="container my-1">
+    <div class="row">
+        {% if 'OK' in request.GET %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Usuario <strong>registrado</strong> satisfactoriamente.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+
+    
+{% endblock %}
+
+{% block second_content %}
+
+    <div class="row row-cols-1 row-cols-md-2 g-4">        
+        <div class="col">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="card">
+                    <div class="card-header text-white bg-dark">
+                        <h2 class="card-title">Registarse</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3 row">
+                            <label for="first_name" class="col-sm-3 col-form-label fw-bold">Nombre:</label>
+                            <div class="col-sm 9">
+                                <input class="form-control" type="text" name="nombre" id="nombre" maxlength=40 required>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="last_name" class="col-sm-3 col-form-label fw-bold">Apellido:</label>
+                            <div class="col-sm 9">
+                                <input class="form-control" type="text" name="apellido" id="apellido" maxlength=40 required>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="email" class="col-sm-3 col-form-label fw-bold">Correo:</label>
+                            <div class="col-sm 9">
+                                <input class="form-control" type="correo" name="correo" id="correo" maxlength=100 required>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="password" class="col-sm-3 col-form-label fw-bold">Contraseña:</label>
+                            <div class="col-sm 9">
+                                <input class="form-control" type="password" name="password" id="password" required>
+                                <ul class="fst-italic fs-6">
+                                    <li>La contraseña debe tener al entre 8 y 16 caracteres</li>
+                                    <li>Al menos un dígito</li>
+                                    <li>Al menos una minúscula y al menos una mayúscula</li>
+                                    <li>No puede tener otros símbolos.</li>
+                                </ul>
+                            </div>
+                            
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="password_confirm" class="col-sm-3 col-form-label fw-bold">Confirme su contraseña: </label>
+                            <div class="col-sm 9">
+                                <input class="form-control" type="password" name="password_confirm" id="password_confirm" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <div class="d-grid gap-2 col-4 mx-auto">
+                            <input class="btn btn-primary" type="submit" value="Registrar">
+                            <input class="btn btn-warning" type="reset" value="Limpiar">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+       
+{% endblock %}

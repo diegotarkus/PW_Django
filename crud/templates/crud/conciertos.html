@@ -1,0 +1,122 @@
+{% extends 'crud/base.html' %}
+
+{% load static %}
+
+{% block title %}Calendario de Conciertos{% endblock %}
+
+{% block first_content %}
+
+<div class="container my-2 py-3 text-dark text-center rounded">
+    <h2>Administrador</h2>
+</div>
+
+<div class="container my-1">
+    <div class="row">
+        {% if 'OK' in request.GET %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Información <strong>ingresada</strong> satisfactoriamente.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+        {% if 'FAIL' in request.GET %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Se ha producido un error.</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+        {% if 'NO_EXISTS' in request.GET %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Concierto no encontrado.</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+        {% if 'UPDATED' in request.GET %}
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            Información <strong>actualizada</strong> satisfactoriamente.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+        {% if 'DELETED' in request.GET %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            Información <strong>eliminada</strong> satisfactoriamente.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
+
+{% block second_content %}
+
+
+<div class="container-fluid my-2">
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Artista</th>
+                    <th>País</th>
+                    <th>Recinto</th>
+                    <th>Fecha</th>
+                    <th>Valores</th>
+                    <th>Link</th>
+                    <th>Afiche</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in conciertos %}
+                <tr>
+                    <td>{{c.idConcierto}}</td>
+                    <td>
+                        <a class="text-dark" href="conciertos/artista/{{c.artista.idArtista}}"><b>{{c.artista}}</b></a>
+                    </td>
+                    <td><b>{{c.artista.pais}}</b></td>
+                    <td><a class="text-dark" href="crud/conciertos/recinto/{{c.recinto.idRecinto}}"><b>{{c.recinto}}</b></a></td>
+                    <td>{{c.fecha}}</td>
+                    <td>{{c.valores}}</td>
+                    <td><a class="text-dark" href="{{c.venta}}">Link</a></td>
+                    <td>
+                        {% if c.imagen %}
+                        <img class="img-afiche" src="{{c.imagen.url}}" alt="{{c.artista}}" width="150" height="100">
+                        {% else%}
+                        <img class="img-afiche" src="{% static 'crud/img/image_not_found.jpg' %}" alt="INF">
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a class="text-decoration-none" href="{% url 'conciertos-info' concierto_id=c.idConcierto %}">
+                            <span class="text-primary fs-2">
+                                <i class="fa-solid fa-eye"></i>
+                            </span>
+                        </a>
+                        <a class="text-decoration-none" href="{% url 'conciertos-editar' concierto_id=c.idConcierto %}">
+                            <span class="text-warning fs-2">
+                                <i class="fa-solid fa-pencil"></i>
+                            </span>
+                        </a>
+                        <a class="text-decoration-none" href="{% url 'conciertos-borrar' concierto_id=c.idConcierto %}">
+                            <span class="text-danger fs-2">
+                                <i class="fa-solid fa-trash"></i>
+                            </span>
+                        </a>
+
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock%}
+
+{% block extra_js %}
+<script>
+    $('.modal-borrar').on('click',function(){
+        const href = $(this).attr('data-href');
+        $('#confirmar-borrar').attr('href',href);
+    });
+</script>
+{% endblock %}

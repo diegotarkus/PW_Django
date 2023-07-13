@@ -1,0 +1,82 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}Calendario de Conciertos{% endblock %}
+
+{% block item_nav %}
+<li class="nav-item">
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Recintos
+    </a>
+    <ul class="dropdown-menu">
+        {% for r in recintos %}
+        <li><a class="dropdown-item" href="/conciertos/recinto/{{r.idRecinto}}">{{r.recinto}}</a></li>
+        {% endfor %}
+    </ul>
+</li>
+{% endblock %}
+
+{% block first_content %}
+<section class="container bg-dark text-white text-center my-4 p-3 rounded">
+    <h3>Conciertos</h3>
+</section>
+
+<div class="container my-1">
+    <div class="row">
+        {% if 'OK' in request.GET %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Usuario <strong>registrado</strong> satisfactoriamente. Por favor, identificate.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="container my-1">
+    <div class="row">
+        {% if 'OK_USER' in request.GET %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Bienvenido, <strong>{{request.session.usuario.nombre}} {{request.session.usuario.apellido}}.</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        {% endif %}
+        </div>
+    </div>
+</div>  
+{% endblock %}
+
+
+{% block second_content %}
+
+<section class="container my-4 bg-secondary">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for c in conciertos %}
+        <div class="col"> 
+            <div class="card h-80">               
+                <div class="card card-img-top" style="width: 15rem;">
+                    {% if c.imagen %}
+                    <img class="img-afiche"  src="{{c.imagen.url}}" class="card-img-top p-2" alt="{{c.artista}}">
+                    {% else %}
+                    <img src="{% static 'img/image_not_found.jpg' %}" class="card-img-top" alt="Image not found">
+                    {% endif  %}
+                    <div class="card-body">
+                        <p class="card-text text-muted">cod: {{c.idConcierto}}</p>
+                        <p class="card-title fw-bold">{{c.artista}}</p>
+                        <p class="card-text">{{c.recinto}}</p>
+                        <p class="card-text">{{c.fecha}}</p>
+                        <p class="card-text">Entradas entre los {{c.valores}}</p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a class="btn btn-primary" href="{% url 'informacion' concierto_id=c.idConcierto %}">
+                            <i class="fa-solid fa-info"></i>
+                        </a>
+                    </div>
+                </div>
+                
+            </div>                
+        </div>
+        {% endfor %}
+    </div>    
+</section>
+
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'crud/base.html' %}
+
+{% load static %}
+
+{% block title%}Añadir recinto{% endblock %}
+
+{% block first_content %}
+<div class="container my-2 py-3 text-dark text-center rounded">
+    <h1>Agregando información de recinto</h1>
+</div>
+<div class="container my-2 p-5">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group mb-3">
+            <label for="idRecinto" class="fw-bold">ID:</label>
+            <div class="input-group">
+                {{form.idRecinto}}
+            </div>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="nomRecinto" class="fw-bold">Recinto:</label>
+            <div class="input-group">
+                {{form.nomRecinto}}
+            </div>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="capacidad" class="fw-bold">Capacidad:</label>
+            <div class="input-group">
+                {{form.capacidad}}
+            </div>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="comuna" class="fw-bold">Comuna:</label>
+            <div class="input-group">
+                {{form.comuna}}
+            </div>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="direccion" class="fw-bold">Dirección:</label>
+            <div class="input-group">
+                {{form.direccion}}
+            </div>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="estacionamiento" class="fw-bold">Estacionamiento:</label>
+            <div class="input-group">
+                {{form.estacionamiento}}
+            </div>
+        </div>
+
+        <div class="text-center my-4">
+            <input type="submit" class="btn btn-primary m-2" id="registrar" value="Guardar">
+            <input type="reset" class="btn btn-danger m-2" id="limpiar" value="Cancelar">
+            <a class="btn btn-success m-2" href="{% url 'recintos' %}">Volver</a>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
