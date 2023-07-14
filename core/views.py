@@ -81,16 +81,18 @@ def registrar(request):
             nombre = request.POST['nombre']
             apellido = request.POST['apellido']
             correo = request.POST['correo']
+            password = request.POST['password']
             password_hash = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt()).decode()
 
             obj = Usuario.objects.create(
                 nombre=nombre, 
                 apellido=apellido,
                 correo=correo,
+                password_decode=password,
                 password=password_hash
             )
             obj.save()
-            messages.success(request, "Usuario registrado con éxito!!!!")
+            messages.success(request, "Usuario registrado.")
             request.session['level_mensaje'] = 'alert-success'
         
             return redirect(reverse('conciertos')+ '?OK')

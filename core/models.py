@@ -59,6 +59,7 @@ class Usuario(models.Model):
     apellido = models.CharField(verbose_name='Apellido', max_length=40)
     correo = models.CharField(verbose_name='Correo', max_length=30, unique=True)
     password = models.CharField(verbose_name='Password', max_length=500)
+    password_decode = models.CharField(verbose_name='Password_Hash', max_length=500, null=True)
     rol = models.CharField(verbose_name='Rol', max_length=20, default='USER')
     creado = models.DateTimeField(verbose_name='Creado', auto_now_add=True)
     actualizado = models.DateField(verbose_name='Actualizado', auto_now=True)    
