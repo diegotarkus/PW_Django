@@ -4,19 +4,6 @@
 
 {% block title %}Calendario de Conciertos{% endblock %}
 
-{% block item_nav %}
-<li class="nav-item">
-    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Recintos
-    </a>
-    <ul class="dropdown-menu">
-        {% for r in recintos %}
-        <li><a class="dropdown-item" href="/conciertos/recinto/{{r.idRecinto}}">{{r.recinto}}</a></li>
-        {% endfor %}
-    </ul>
-</li>
-{% endblock %}
-
 {% block first_content %}
 <section class="container bg-dark text-white text-center my-4 p-3 rounded">
     <h3>Conciertos</h3>

@@ -59,7 +59,8 @@
                         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                             <div class="navbar-nav">
                                 {% if request.session.usuario.rol == 'ADMIN' %}
-                                    <a class="nav-link " href="/admin">Admin</a>
+                                    <a class="nav-link " href="/admin">AdminPanel</a>
+                                    <a class="nav-link " href="/crud/">AdminCRUD</a>
                                     <a class="nav-link " href="{% url 'logout' %}">Logout</a>
                                 {% elif request.session.usuario.rol == 'USER' %}
                                     <a class="nav-link " href="{% url 'logout' %}">Logout</a>                                    

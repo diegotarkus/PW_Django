@@ -27,53 +27,57 @@
             {% endif %}
             </div>
         </div>
-    </div>  
+    </div>
+</div>
 
-    <form id="formulario" action="" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="card-body">
-            <div class="mb-3">
-                <label for="nombre">Nombre: </label>
-                <div class="input-group">
-                    {{form.nombre}}
+<div class="card text-bg-dark mb-3 opacity-75">
+    <div class="card-body">
+        <form id="formulario" action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="nombre">Nombre: </label>
+                    <div class="input-group">
+                        {{form.nombre}}
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="apellido">Apellido: </label>
+                    <div class="input-group">
+                        {{form.apellido}}
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="correo">Correo eléctronico: </label>
+                    <div class="input-group">
+                        {{form.correo}}
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="telefono">Teléfono: </label>
+                    <div class="input-group">
+                        {{form.telefono}}
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="mensaje">Comentario: </label>
+                    <div class="input-group">
+                        {{form.mensaje}}
+                    </div>
                 </div>
             </div>
-
-            <div class="mb-3">
-                <label for="apellido">Apellido: </label>
-                <div class="input-group">
-                    {{form.apellido}}
-                </div>
+            <br>
+            <div class="text-center my-4">
+                <input type="submit" class="btn btn-primary m-2" id="registrar" value="Guardar">
+                <input type="reset" class="btn btn-danger m-2" id="limpiar" value="Limpiar">
             </div>
-
-            <div class="mb-3">
-                <label for="correo">Correo eléctronico: </label>
-                <div class="input-group">
-                    {{form.correo}}
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label for="telefono">Teléfono: </label>
-                <div class="input-group">
-                    {{form.telefono}}
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label for="mensaje">Comentario: </label>
-                <div class="input-group">
-                    {{form.mensaje}}
-                </div>
-            </div>
-        </div>
-        <br>
-        <div class="text-center my-4">
-            <input type="submit" class="btn btn-primary m-2" id="registrar" value="Guardar">
-            <input type="reset" class="btn btn-danger m-2" id="limpiar" value="Limpiar">
-        </div>
-        <hr>        
-    </form>
+            <hr>        
+        </form>
+    </div>    
 </div>
 
 

@@ -34,7 +34,7 @@
     <form action="" method="POST">
         {% csrf_token %}
         <div class="card border-0">
-            <div class="card-header text-white bg-dark">
+            <div class="card-header text-dark bg-info d-flex justify-content-center">
                 <h2 class="card-title">Login</h2>
             </div>
             <div class="card-body">
@@ -53,8 +53,7 @@
             </div>
             <div class="card-footer text-center bg-transparent border-0">
                 <div class="d-grid gap-2 col-4 mx-auto">
-                    <input class="btn btn-primary" type="submit" value="Entrar">
-                    <input class="btn btn-dark" type="reset" value="Clear">
+                    <input class="btn btn-success" type="submit" value="Entrar">
                 </div>
             </div>
         </div>
